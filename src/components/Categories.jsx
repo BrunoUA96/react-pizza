@@ -10,16 +10,6 @@ const categoryList = [
     'Закрытые'
 ];
 
-// Category element
-function CategoryItem({categoryName, index, activeCategory, setActiveCategory}) {
-    return (
-        <li className={activeCategory === index ? 'active' : ''}
-            onClick={() => setActiveCategory(index)}>
-            {categoryName}
-        </li>
-    )
-}
-
 function Categories() {
     // useState to add active class on clicked category
     const [activeCategory, setActiveCategory] = useState(0);
@@ -28,9 +18,13 @@ function Categories() {
         <div className="categories">
             <ul>
                 {
-                    categoryList.map((categoryName, index) =>
-                        <CategoryItem key={index} categoryName={categoryName} index={index}
-                                      activeCategory={activeCategory} setActiveCategory={setActiveCategory}/>)
+                    categoryList.map((categoryName, index) => (
+                        <li className={activeCategory === index ? 'active' : ''}
+                            key={index}
+                            onClick={() => setActiveCategory(index)}>
+                            {categoryName}
+                        </li>
+                    ))
                 }
             </ul>
         </div>

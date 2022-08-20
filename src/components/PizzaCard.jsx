@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 
-function PizzaCard({title, price}) {
-
+function PizzaCard({title, price, imageUrl, sizes, types}) {
     // Пример дискруктизации
     // const obj = {a: 1, b: 2, c: 3};
     // Обычный способ дисктруктиризации
@@ -13,30 +12,46 @@ function PizzaCard({title, price}) {
     // const {a, b, c} = {a: 1, b: 2, c: 3};
     // console.log(a, b, c);
 
-    // useState Hook Example
+    // useState Hook Count
     const [countPizza, setPizzaCount] = useState(0);
+
+    // UseState Size of Pizza
+    const [indexSizePizza, setSizePizza] = useState(0);
+
+    // List Types
+    const typesList = ['Thin', 'Traditional'];
+
+    // UseState Types
+    const [indexType, setIndexType] = useState(0);
 
     return (
         <div className="pizza-block">
             <img
                 className="pizza-block__image"
-                src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+                src={imageUrl}
                 alt="Pizza"
             />
             <h4 className="pizza-block__title">{title}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    <li className="active">тонкое</li>
-                    <li>традиционное</li>
+                    {types.map(type =>
+                        <li className={indexType === type ? 'active' : ''}
+                            key={type}
+                            onClick={() => setIndexType(type)}>{typesList[type]}
+                        </li>
+                    )}
                 </ul>
                 <ul>
-                    <li className="active">26 см.</li>
-                    <li>30 см.</li>
-                    <li>40 см.</li>
+                    {
+                        sizes.map((size, index) => (
+                            <li key={index} onClick={() => setSizePizza(index)}
+                                className={indexSizePizza === index ? 'active' : ''}>{size} sm</li>
+                        ))
+                    }
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от {price || price === 0 ? price : 'teste'}</div>
+                <div className="pizza-block__price">from {price} $</div>
                 <button className="button button--outline button--add" onClick={() => setPizzaCount(countPizza + 1)}>
                     <svg
                         width="12"
@@ -50,7 +65,7 @@ function PizzaCard({title, price}) {
                             fill="white"
                         />
                     </svg>
-                    <span>Добавить</span>
+                    <span>Add </span>
                     <i>{countPizza}</i>
                 </button>
             </div>
