@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function PizzaCard({title, price, imageUrl, sizes, types}) {
+function Index({title, price, imageUrl, sizes, types}) {
     // Пример дискруктизации
     // const obj = {a: 1, b: 2, c: 3};
     // Обычный способ дисктруктиризации
@@ -73,4 +73,4 @@ function PizzaCard({title, price, imageUrl, sizes, types}) {
     );
 }
 
-export default PizzaCard;
+export default Index;
