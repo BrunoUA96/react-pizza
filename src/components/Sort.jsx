@@ -1,15 +1,18 @@
 import React, {useState} from "react";
 
-function Sort() {
+function Sort({activeSortItem, onClickSort}) {
 
     const [stateDropdown, setStateDropdown] = useState(false);
 
     // Sort options list
-    const sortList = ['popular', 'price', 'alphabet'];
-    const [activeSortItem, setActiveSortItem] = useState(0);
+    const sortList = [
+        {nameValue: 'popular', sortBy: 'rating'},
+        {nameValue: 'price', sortBy: 'price'},
+        {nameValue: 'alphabet', sortBy: 'title'}
+    ];
 
-    const setSortItem = (index) => {
-        setActiveSortItem(index);
+    const setSortItem = (sortProperty) => {
+        onClickSort(sortProperty);
         setStateDropdown(!stateDropdown);
     }
 
@@ -29,18 +32,18 @@ function Sort() {
                     />
                 </svg>
                 <b>Sort by:</b>
-                <span onClick={() => setStateDropdown(!stateDropdown)}>{sortList[activeSortItem]}</span>
+                <span onClick={() => setStateDropdown(!stateDropdown)}>{activeSortItem.nameValue}</span>
             </div>
             {stateDropdown && (
                 <div className="sort__popup">
                     <ul>
                         {sortList.map((item, index) =>
                             <li
-                                onClick={() => setSortItem(index)}
-                                className={activeSortItem === index && 'active'}
+                                onClick={() => setSortItem(item)}
+                                className={activeSortItem.nameValue === item.nameValue ? 'active' : ''}
                                 key={index}
                             >
-                                {item}
+                                {item.nameValue}
                             </li>
                         )}
                     </ul>

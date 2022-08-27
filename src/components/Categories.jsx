@@ -1,19 +1,16 @@
-import React, {useState} from "react";
+import React from "react";
 
 // Categories list
 const categoryList = [
-    'Все',
-    'Мясные',
-    'Вегетарианская',
-    'Гриль',
-    'Острые',
-    'Закрытые'
+    'All',
+    'Meat',
+    'Vegetarian',
+    'Grill',
+    'Acute',
+    'Closed'
 ];
 
-function Categories() {
-    // useState to add active class on clicked category
-    const [activeCategory, setActiveCategory] = useState(0);
-
+function Categories({activeCategory, onClickCategory}) {
     return (
         <div className="categories">
             <ul>
@@ -21,7 +18,7 @@ function Categories() {
                     categoryList.map((categoryName, index) => (
                         <li className={activeCategory === index ? 'active' : ''}
                             key={index}
-                            onClick={() => setActiveCategory(index)}>
+                            onClick={() => onClickCategory(index)}>
                             {categoryName}
                         </li>
                     ))
