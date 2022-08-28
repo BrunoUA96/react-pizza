@@ -3,8 +3,16 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import Skeleton from "../components/PizzaCard/SkeletonCard";
 import PizzaCard from "../components/PizzaCard";
+import {SearchContext} from "../App";
 
-function Home({searchValue}) {
+function Home() {
+    // If loading true use Skeleton card
+    const [isLoading, setIsLoading] = useState(true)
+    const [pizzaItems, setPizzaItems] = useState(isLoading ? [...new Array(6)] : []);
+
+    // Use Search Context to search Pizzas
+    const {searchValue} = React.useContext(SearchContext)
+
     // useState to select Active category
     const [activeCategory, setActiveCategory] = useState(0);
 
@@ -12,10 +20,6 @@ function Home({searchValue}) {
     const [activeSortItem, setActiveSortItem] = useState(
         {nameValue: 'popular', sortBy: 'rating'}
     );
-
-    // If loading true use Skeleton card
-    const [isLoading, setIsLoading] = useState(true)
-    const [pizzaItems, setPizzaItems] = useState(isLoading ? [...new Array(6)] : []);
 
     useEffect(() => {
         // Turn on Skeleton

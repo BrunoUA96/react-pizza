@@ -17,6 +17,11 @@
       right: 5px;
       width: 35px;
       height: 35px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: .8;
+      }
     }
   }
 
@@ -26,5 +31,9 @@
     padding: 10px 35px;
     font-size: 18px;
     width: 400px;
+
+    &:focus {
+      border-color: #7b7b7b;
+    }
   }
 }
