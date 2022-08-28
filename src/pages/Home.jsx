@@ -4,7 +4,7 @@ import Sort from "../components/Sort";
 import Skeleton from "../components/PizzaCard/SkeletonCard";
 import PizzaCard from "../components/PizzaCard";
 
-function Home() {
+function Home({searchValue}) {
     // useState to select Active category
     const [activeCategory, setActiveCategory] = useState(0);
 
@@ -22,7 +22,8 @@ function Home() {
         setIsLoading(true);
         fetch(
             'https://630293a7c6dda4f287bbb622.mockapi.io/items?'
-            + (activeCategory !== 0 ? `category=${activeCategory}` : '')
+            + (searchValue ? `title=${searchValue.toLowerCase()}` : '')
+            + (activeCategory !== 0 ? `${searchValue ? '&' : ''}category=${activeCategory}` : '')
             + (`&sortBy=${activeSortItem.sortBy}`)
             + '&order=desc'
         ).then((res) => {
@@ -31,8 +32,7 @@ function Home() {
             setPizzaItems(json)
             setIsLoading(false);
         })
-    }, [activeCategory, activeSortItem]);
-
+    }, [activeCategory, activeSortItem, searchValue]);
 
     return (
         <div className="container">

@@ -1,0 +1,30 @@
+.search_box {
+  position: relative;
+
+  .icon {
+    opacity: .4;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.search {
+      left: 8px;
+      width: 23px;
+      height: 23px;
+    }
+
+    &.clear {
+      right: 5px;
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  .input {
+    border: 1px solid #b6b6b6;
+    border-radius: 10px;
+    padding: 10px 35px;
+    font-size: 18px;
+    width: 400px;
+  }
+}
