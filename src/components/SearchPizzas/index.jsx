@@ -25,7 +25,8 @@ function Index() {
             {searchValue && <img className={`${Classes.icon} ${Classes.clear}`}
                                  src={ClearIcon}
                                  onClick={() => setSearchValue('')}
-                                 alt="Clear input"/>}
+                                 alt="Clear input"/>
+            }
         </div>
     );
 }

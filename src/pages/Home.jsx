@@ -4,22 +4,22 @@ import Sort from "../components/Sort";
 import Skeleton from "../components/PizzaCard/SkeletonCard";
 import PizzaCard from "../components/PizzaCard";
 import {SearchContext} from "../App";
+import {useDispatch, useSelector} from "react-redux";
+import {setActiveCategory, setSort} from '../redux/slices/filterSlice'
 
 function Home() {
+
+    // State Category & SortBy
+    const {activeCategory, activeSortItem} = useSelector((state) => state.filterSlice);
+    const dispatch = useDispatch()
+
+
     // If loading true use Skeleton card
     const [isLoading, setIsLoading] = useState(true)
     const [pizzaItems, setPizzaItems] = useState(isLoading ? [...new Array(6)] : []);
 
     // Use Search Context to search Pizzas
     const {searchValue} = React.useContext(SearchContext)
-
-    // useState to select Active category
-    const [activeCategory, setActiveCategory] = useState(0);
-
-    // useState to select Active Sort
-    const [activeSortItem, setActiveSortItem] = useState(
-        {nameValue: 'popular', sortBy: 'rating'}
-    );
 
     useEffect(() => {
         // Turn on Skeleton
@@ -41,8 +41,8 @@ function Home() {
     return (
         <div className="container">
             <div className="content__top">
-                <Categories activeCategory={activeCategory} onClickCategory={(i) => setActiveCategory(i)}/>
-                <Sort activeSortItem={activeSortItem} onClickSort={(i) => setActiveSortItem(i)}/>
+                <Categories activeCategory={activeCategory} onClickCategory={(i) => dispatch(setActiveCategory(i))}/>
+                <Sort activeSortItem={activeSortItem} onClickSort={(odj) => dispatch(setSort(odj))}/>
             </div>
             <h2 className="content__title">All pizzas</h2>
             <div className="content__items">
